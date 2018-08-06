@@ -33,14 +33,14 @@ class Page {
 
 		if ($this->options['data']) $this->setData($this->options['data']);
 
-		if ($this->options['header'] === true) $this->tpl->draw("header", false);
+		if ($this->options['header'] === true) $this->tpl->draw("header", false); // se a pessoa carrego header (true) entao exibe, se nao esconde(false).
 
 	}
 
 	public function __destruct()
 	{
 
-		if ($this->options['footer'] === true) $this->tpl->draw("footer", false);
+		if ($this->options['footer'] === true) $this->tpl->draw("footer", false); // se a pessoa carrego o footer (True) entao exibe o footer, caso false esconde
 
 	}
 
