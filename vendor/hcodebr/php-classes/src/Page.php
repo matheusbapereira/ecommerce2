@@ -9,10 +9,12 @@ class Page {
 	private $tpl;
 	private $options = [];
 	private $defaults = [
-		"header"=>true,
-		"footer"=>true,
-		"data"=>[]
-	];
+    "header"=>true,
+    "footer"=>true,
+    "data"=>[            
+       "data"=> []
+    ]
+];
 
 	
 
@@ -44,17 +46,12 @@ class Page {
 
 	}
 
-	private function setData($data = array())
-	{
-
-		foreach($data as $key => $val)
-		{
-
-			$this->tpl->assign($key, $val);
-
-		}
-
-	}
+private function setData($data = array()) 
+{
+    foreach ($data as $key => $value) {
+        $this->tpl->assign($key, $value);
+    }
+}
 
 	public function setTpl($tplname, $data = array(), $returnHTML = false)
 	{
