@@ -44,11 +44,8 @@ class Model {
 
 	}
 
-	public function getValues()
-	{
-
+	public function getValue(){ //metodo criado para retornar o valor, pois o atributo é privado e causaria erro sem sua utilização
 		return $this->values;
-
 	}
 
 }
