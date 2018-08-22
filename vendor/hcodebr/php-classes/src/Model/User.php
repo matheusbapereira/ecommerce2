@@ -10,7 +10,7 @@ class User extends Model {
 	const SESSION = "User";
 
 	protected $fields = [
-		"iduser", "idperson", "deslogin", "despassword", "inadmin", "dtergister"
+		"iduser", "idperson", "deslogin", "despassword", "inadmin", "dtergister", "desperson", "nrphone", "desemail"
 	];
 
 	public static function login($login, $password):User
@@ -91,7 +91,7 @@ class User extends Model {
  
 	 $sql = new Sql();
 	 
-	 $results = $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b USING(idperson) WHERE a.iduser = :iduser;", array(
+	 $results = $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b USING(idperson) WHERE a.iduser = :iduser", array(
 	 ":iduser"=>$iduser
 	 ));
 	 
@@ -103,17 +103,16 @@ class User extends Model {
 
 	 public function save()
 	 {
-	 	$sql = new sql();
-		$results = $sql->select("CALL sp_users_save(:desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin", 
-			array(
-				":desperson"=>$this->getdesperson(),
-				":deslogin"=>$this->getdeslogin(),
-				":despassword"=>$this->getdespassword(),
-				":desemail"=>$this->getdesemail(),
-				":nrphone"=>$this->getnrphone(),
-				":inadmin"=>	$this->getinadmin()
-		)
-	);
+	 	$sql = new Sql();
+	$results = $sql->select("CALL sp_users_save(:desperson, :deslogin, :despassword, :desemail, :nrphone, 
+	:inadmin)", array(
+    ":desperson"=>$this->getdesperson(),
+    ":deslogin"=>$this->getdeslogin(),
+    ":despassword"=>$this->getdespassword(),
+    ":desemail"=>$this->getdesemail(),
+    ":nrphone"=>$this->getnrphone(),
+    ":inadmin"=>$this->getinadmin()
+));
 
 		$this->setData($results[0]);
 
