@@ -1,15 +1,16 @@
 {
-    "name": "matheusbapereira/ecommerce",
+    "name": "fdavidcunha/ecommerce",
     "authors": [
         {
-            "name": "Matheus Batista",
-            "email": "matheusbatistaap@hotmail.com"
+            "name": "Davi'd Ferreira",
+            "email": "f.david.cunha@gmail.com"
         }
     ],
     "require": {
     	"phpmailer/phpmailer":"5.2.22",
     	"slim/slim":"2.0",
-    	"rain/raintpl":"3.0.0"
+    	"rain/raintpl":"3.0.0",
+        "guzzlehttp/guzzle":"*"
     },
     "autoload": {
         "psr-4": {

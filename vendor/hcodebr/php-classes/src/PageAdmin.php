@@ -4,13 +4,12 @@ namespace Hcode;
 
 class PageAdmin extends Page {
 
-	public function __construct($opts = array(), $tpl_dir = "/views/admin/")
+	public function __construct( $opts = array(), $tpl_dir = "/views/admin/" )
 	{
-		// chama construtor da classe Page
-		parent::__construct($opts, $tpl_dir);
-
+		$page = explode( "/", $_SERVER[ 'REQUEST_URI' ] );
+		$opts[ 'page' ] = end( $page );
+		parent::__construct( $opts, $tpl_dir );
 	}
-
 }
 
 ?>

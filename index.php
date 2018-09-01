@@ -1,121 +1,49 @@
 <?php 
-session_start();
-require_once("vendor/autoload.php");
-require_once("functions.php");
+    error_reporting( -1 );
+    ini_set( 'display_errors', 1 );
 
+	session_start();
 
+	require_once("vendor/autoload.php");
 
-use Hcode\Model\User;
+	use \Slim\Slim;
+	use \Slim\App;
 
-$app = new \Slim\Slim();
+	$app = new Slim();
 
-$app->config('debug', true);
+	$app->config('debug', true);
 
-$app->get('/', function() {
-    
-	$page = new Hcode\Page();
+	require_once( "functions.php" );
+	require_once( "site.php" );
+	require_once( "site-cart.php" );
+	require_once( "site-checkout.php" );
+	require_once( "site-login.php" );
+	require_once( "site-profile.php" );
+	require_once( "site-pagseguro.php" );
+	require_once( "admin.php" );
+	require_once( "admin-users.php" );
+	require_once( "admin-categories.php" );
+	require_once( "admin-products.php" );
+	require_once( "admin-orders.php" );
 
-	$page->setTpl("index");
+	$app->notFound( function() use ( $app ) {
 
-});
+		http_response_code( 404 );
+  		echo file_get_contents( 'res/404.html' );
+  		exit;
+	});
 
-$app->get('/admin', function() {
-    
-	User::verifyLogin();
+    // Redirecionamento para página de erro personalizada.
+    $app->error( function ( \Exception $e ) use ( $app ) {
+        
+    	$errorData = array( 'error' => $e->getMessage() );
+        $app->render( 'res/500.html', $errorData, 500 );
 
-	$page = new Hcode\PageAdmin();
+        //echo $e->getMessage();
+        //echo "<br>";
+        //echo file_get_contents( 'res/500.html' );
+        //exit;
+    });
 
-	$page->setTpl("index");
-
-});
-
-$app->get('/admin/login', function() {
-    
-	$page = new Hcode\PageAdmin([
-		"header"=>false,
-		"footer"=>false
-	]);
-
-	$page->setTpl("login");
-
-});
-
-$app->post('/admin/login', function() {
-
-	User::login($_POST['login'], $_POST['password']);
-
-	header("Location: /admin");
-	exit;
-
-});
-
-$app->get('/admin/logout', function() {
-
-	User::logout();
-
-	header("Location: /admin/login");
-	exit;
-
-});
-
-$app->get("/admin/users", function() {
-
-	User::verifyLogin();
-
-	$users = User::listAll();
-
-	$page = new Hcode\PageAdmin();
-
-	$page->setTpl("users",array(
-		"users"=>$users
-	));
-});	
-
-//Rota para cadastrar usuario - Painel ADMIN -
-$app->post("/admin/users/create", function () {
-    User::verifyLogin();
-    $user = new User();
-    $_POST["inadmin"] = (isset($_POST["inadmin"]))?1:0;
-  
-    $user->setData($_POST);
-    $user->save();
-    header("Location: /admin/users");
-    exit;
-});
-
-
-// deletar usuario -  Painel ADMIN -
-$app->get("/admin/users/:iduser/delete", function($iduser){
-
-	User::verifyLogin();
-
-});
-
-$app->get('/admin/users/:iduser', function($iduser){
- 
-   User::verifyLogin();
- 
-   $user = new User();
- 
-   $user->get((int)$iduser);
- 
-   $page = new Hcode\PageAdmin();
- 
-   $page ->setTpl("users-update", array(
-        "user"=>$user->getValues()
-    ));
- 
-});
-
-
-$app->post("/admin/users/:iduser", function($iduser){
-
-	User::verifyLogin();
-
-
-});
-
-
-$app->run();
-
+	$app->run();
  ?>

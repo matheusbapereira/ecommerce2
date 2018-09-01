@@ -13,16 +13,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="/res/admin/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https:/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="https:/cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="/res/admin/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect.
   -->
-  <link rel="stylesheet" href="/res/admin/dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="/res/admin/dist/css/skins/skin-black.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,6 +31,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
+
 <!--
 BODY TAG OPTIONS:
 =================
@@ -51,14 +52,14 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-black sidebar-mini">
 <div class="wrapper">
 
   <!-- Main Header -->
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="res/admin/index2.html" class="logo">
+    <a href="/res/admin/index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
@@ -90,7 +91,7 @@ desired effect
                     <a href="#">
                       <div class="pull-left">
                         <!-- User Image -->
-                        <img src="res/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="/res/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                       </div>
                       <!-- Message title and timestamp -->
                       <h4>
@@ -243,9 +244,10 @@ desired effect
       <!-- search form (Optional) -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <input type="text" name="q" class="form-control" placeholder="Procurar...">
               <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                  <i class="fa fa-search"></i>
                 </button>
               </span>
         </div>
@@ -253,22 +255,108 @@ desired effect
       <!-- /.search form -->
 
       <!-- Sidebar Menu -->
+      <!-- Optionally, you can add icons to the links -->
       <ul class="sidebar-menu">
-        <li class="header">HEADER</li>
-        <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="/admin/users"><i class="fa fa-users"></i> <span>Usuários</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+        
+        <li class="treeview active">
+          <a href="#">
+            <i class="fa fa-navicon"></i> 
+              <span>Cadastros</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            
+              <?php if( $page == 'users' ){ ?>
+
+              <li class="active">
+                  <a href="/admin/users">
+                      <i class="fa fa-users"></i> 
+                      <span>Usuários</span>
+                  </a>
+              </li>
+              <?php }else{ ?>
+
+              <li>
+                  <a href="/admin/users">
+                      <i class="fa fa-users"></i> 
+                      <span>Usuários</span>
+                  </a>
+              </li>
+              <?php } ?>            
+
+              <?php if( $page == 'categories' ){ ?>
+
+              <li class="active">
+                  <a href="/admin/categories">
+                      <i class="fa fa-th-large"></i> 
+                      <span>Categorias</span>
+                  </a>
+              </li>
+              <?php }else{ ?>
+
+              <li>
+                  <a href="/admin/categories">
+                      <i class="fa fa-th-large"></i> 
+                      <span>Categorias</span>
+                  </a>
+              </li>
+              <?php } ?>            
+
+              <?php if( $page == 'products' ){ ?>
+
+              <li class="active">
+                  <a href="/admin/products">
+                      <i class="fa fa-cubes"></i> 
+                      <span>Produtos</span>
+                  </a>
+              </li>
+              <?php }else{ ?>
+
+              <li>
+                  <a href="/admin/products">
+                      <i class="fa fa-cubes"></i> 
+                      <span>Produtos</span>
+                  </a>
+              </li>
+              <?php } ?>            
+
+              <?php if( $page == 'orders' ){ ?>
+
+              <li class="active">
+                  <a href="/admin/orders">
+                      <i class="fa fa-shopping-cart"></i> 
+                      <span>Pedidos</span>
+                  </a>
+              </li>
+              <?php }else{ ?>
+
+              <li>
+                  <a href="/admin/orders">
+                      <i class="fa fa-shopping-cart"></i> 
+                      <span>Pedidos</span>
+                  </a>
+              </li>
+              <?php } ?>            
+
+          </ul>
+        </li>
+        
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+          <a href="#">
+            <i class="fa fa-link"></i> 
+              <span>Multilevel</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
           </a>
           <ul class="treeview-menu">
             <li><a href="#">Link in level 2</a></li>
             <li><a href="#">Link in level 2</a></li>
           </ul>
         </li>
+
       </ul>
       <!-- /.sidebar-menu -->
     </section>
